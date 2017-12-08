@@ -43,28 +43,28 @@ function prefix_resource_search_cat() {
 	switch (false) {
 	case ($_POST['$cat_id'] == "-1"):
 		$terms = get_term_by('id',$_POST['$cat_id'],'resource_cat');
+		$cat_slug = $terms->slug;
         /* print_r ( "cat slug = " . $terms->slug); */
-	    $url='http://autismva.teebark.com/?post_type=resource_db&resource_cat=' . $terms->slug . '&s=' . $s . '&tag=' . $tag_slug;
-		break;
+	    /* $url='http://autismva.teebark.com/?post_type=resource_db&resource_cat=' . $terms->slug . '&s=' . $s . '&tag=' . $tag_slug; */
 	case ($_POST['$age_id'] == "-1"):
 		$terms = get_term_by('id',$_POST['$age_id'],'resource_age');
+		$age_slug = $terms->slug;
         /* print_r ( "age slug = " . $terms->slug); */
-	    $url='http://autismva.teebark.com/?post_type=resource_db&resource_age=' . $terms->slug . '&s=' . $s . '&tag=' . $tag_slug;
-		break;
+	    /* $url='http://autismva.teebark.com/?post_type=resource_db&resource_age=' . $terms->slug . '&s=' . $s . '&tag=' . $tag_slug; */
 	case ($_POST['$region_id'] == "-1"):
 		$terms = get_term_by('id',$_POST['$region_id'],'resource_region');
+		$region_slug = $terms->slug;
         /* print_r ( "region slug = " . $terms->slug); */
-	    $url='http://autismva.teebark.com/?post_type=resource_db&resource_region=' . $terms->slug . '&s=' . $s . '&tag=' . $tag_slug;
-		break;
-	default:
-	    $url='http://autismva.teebark.com/?post_type=resource_db' . '&s=' . $s . '&tag=' . $tag_slug;
+	    /* $url='http://autismva.teebark.com/?post_type=resource_db&resource_region=' . $terms->slug . '&s=' . $s . '&tag=' . $tag_slug; */
 		break;
 	}
+	$url='http://autismva.teebark.com/?post_type=resource_db&resource_cat=' . $cat_slug . '&resource_age=' . $age_slug;
+	$url=$url . '&resource_region=' . $region_slug . "&s=" . $s . '&tag=' . $tag_slug;
 	/* print_r ("url = " . $url); */
 	wp_redirect($url);
 	exit; 
 }
-add_action ('admin_post_nopriv_resourece_search_cat', 'prefix_resource_search_cat');
+add_action ('admin_post_nopriv_resource_search_cat', 'prefix_resource_search_cat');
 add_action ('admin_post_resource_search_cat', 'prefix_resource_search_cat');
 
 ?>
