@@ -1,5 +1,5 @@
 <?php
-/* Template Name: resource-search-cat */
+/* Template Name: resource-search-cat2 */
 get_header();
 ?>
 
@@ -18,7 +18,7 @@ get_header();
 		<?php wp_dropdown_categories( 'show_count=0&exclude=128&show_option_none=Select by region&name=$region_id&taxonomy=resource_region' ); ?><br>
 		<input type="text" name="s" placeholder="Search by keyword" /><br>
 		<input type="text" name="tag_name" placeholder="Search by tag" />
-		<input type="hidden" name="action" value="resource_search_cat" />
+		<input type="hidden" name="action" value="resource_search_cat2" />
 		<button type="submit" > Search </button>
 	</form>
 </li>
