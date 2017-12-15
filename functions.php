@@ -78,21 +78,25 @@ function prefix_resource_search_cat2() {
 	*/
 	$terms = get_term_by('name',$_POST['tag_name'],'post_tag');
 	$tag_slug = $terms->slug;
+	$tag_name = $terms->name;
 	/* print_r ( "tag slug = " . $tag_slug); */
 	switch (false) {
 	case ($_POST['$cat_id'] == "-1"):
 		$terms = get_term_by('id',$_POST['$cat_id'],'resource_cat');
 		$cat_slug = $terms->slug;
+		$cat_name = $terms->name;
         /* print_r ( "cat slug = " . $terms->slug); */
 	    /* $url='http://autismva.teebark.com/?post_type=resource_db&resource_cat=' . $terms->slug . '&s=' . $s . '&tag=' . $tag_slug; */
 	case ($_POST['$age_id'] == "-1"):
 		$terms = get_term_by('id',$_POST['$age_id'],'resource_age');
 		$age_slug = $terms->slug;
+		$age_name = $terms->name;
         /* print_r ( "age slug = " . $terms->slug); */
 	    /* $url='http://autismva.teebark.com/?post_type=resource_db&resource_age=' . $terms->slug . '&s=' . $s . '&tag=' . $tag_slug; */
 	case ($_POST['$region_id'] == "-1"):
 		$terms = get_term_by('id',$_POST['$region_id'],'resource_region');
 		$region_slug = $terms->slug;
+		$region_name = $terms->name;
         /* print_r ( "region slug = " . $terms->slug); */
 	    /* $url='http://autismva.teebark.com/?post_type=resource_db&resource_region=' . $terms->slug . '&s=' . $s . '&tag=' . $tag_slug; */
 		break;
@@ -101,12 +105,20 @@ function prefix_resource_search_cat2() {
 	$url=$url . '&resource_region=' . $region_slug . "&s=" . $s . '&tag=' . $tag_slug;
 	/* print_r ("url = " . $url); */
 	$args = array( 
+		'cat_id'	  => $cat_id,
+		'age_id'      => $age_id,
+		'region_id'   => $region_id,
 		'cat_slug'    => $cat_slug,
 		'age_slug'    => $age_slug,
 		'region_slug' => $region_slug,
 		's'           => $s,
-		'tag'         => $tag_slug);
-	$url = add_query_arg($args,'http://autismva.teebark.com/');
+		'tag'         => $tag_slug,
+		'cat_name'    => $cat_name,
+		'age_name'    => $age_name,
+		'region_name' => $region_name,
+		'tag_name'    => $tag_name
+		);
+	$url = add_query_arg($args,'http://autismva.teebark.com/resource-result-cat/');
 	wp_safe_redirect($url);
 	exit; 
 }
@@ -116,10 +128,17 @@ add_action ('admin_post_resource_search_cat2', 'prefix_resource_search_cat2');
 /* Set up for page parms */
 function custom_query_vars_filter($vars) {
   $vars[] = 's';
-  $vars[] .= 'cat_slug';
-  $vars[] .= 'age_slug';
-  $vars[] .= 'region_slug';
-  $vars[] .= 'tag_slug';
+  $vars[] = 'cat_id';
+  $vars[] = 'age_id';
+  $vars[] = 'region_id';
+  $vars[] = 'cat_slug';
+  $vars[] = 'age_slug';
+  $vars[] = 'region_slug';
+  $vars[] = 'tag_slug';
+  $vars[] = 'cat_name';
+  $vars[] = 'age_name';
+  $vars[] = 'region_name';
+  $vars[] = 'tag_name';
   return $vars;
 }
 add_filter( 'query_vars', 'custom_query_vars_filter' );

@@ -7,16 +7,73 @@ get_header(); ?>
 		<div id="content-area" class="clearfix">
 			<div id="left-area">
 		<?php
-			$s = get_query_var('s');
+			$s = get_query_var('s',FALSE);
+			$tag_id = get_query_var('tag_id',FALSE);
+			$cat_id = get_query_var('cat_id',FALSE);
+			$age_id = get_query_var('age_id',FALSE);
+			$region_id = get_query_var('region_id',FALSE);
+			$tag_slug = get_query_var('tag_slug',FALSE);
+			$cat_slug = get_query_var('cat_slug',FALSE);
+			$age_slug = get_query_var('age_slug',FALSE);
+			$region_slug = get_query_var('region_slug',FALSE);
+			$tag_name = get_query_var('tag_name',FALSE);
+			$cat_name = get_query_var('cat_name',FALSE); 
+			/* print_r ("cat = " . $cat_slug . ", type = " . gettype($cat_slug) . ", len = " . strlen($cat_slug)); */
+			?>
+			You searched on:<br>
+			Category = <?php print_r ($cat_name); ?><br>
+			Age = <?php print_r ($age_name); ?><br>
+			Region = <?php print_r ($region_name); ?><br>
+			Keyword = <?php print_r ($s); ?><br>
+			Tag = <?php print_r ($tag_name); ?><br>
+			<?php 
 			$temp_post = $post; // Storing the object temp
+			/*
 			$query = new WP_Query(
 				array(
-					's'         => $s,
 					'post_type' => 'resource_db',
-					'showposts' => 6
+					's'         => $s,
+					'showposts' => -1,
 				)
 			);
-			if ( $query->have_posts() ) :
+			*/
+			$query = new WP_Query(
+				array(
+					'post_type' => 'resource_db',
+					'showposts'  => -1,
+					'tax_query'     => array (
+					/*
+						'relation' => 'AND',
+						*/
+						array(
+							'taxonomy'  => 'resource_cat',
+							'field'     => 'term_id',
+							'terms'     => -1,
+						),
+						/*
+						array(
+							'taxonomy'  => 'resource_age',
+							'field'     => 'term_id',
+							'terms'     => $age_id,
+							'showposts' => -1,
+						),
+						array(
+							'taxonomy'  => 'resource_region',
+							'field'     => 'term_id',
+							'terms'     => $region_id,
+							'showposts' => -1,
+						),
+						array(
+							'taxonomy'  => 'post_tag',
+							'field'     => 'slug',
+							'terms'     => $tag_slug,
+							'showposts' => -1,
+						),
+						*/
+				)));
+			?>
+			, Count: <?php print_r($query->post_count); ?>
+			<?php if ( $query->have_posts() ) :
 				while ( $query->have_posts() ) : $query->the_post();
 					$post_format = et_pb_post_format(); ?>
 
