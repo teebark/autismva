@@ -69,7 +69,7 @@ add_action ('admin_post_resource_search_cat', 'prefix_resource_search_cat');
 /* Test search */
 function prefix_resource_search_cat2() {
 	/* post variables available */
-	$s = $_POST['s'];
+	$s_term = $_POST['s'];
 	/*
 	print_r ("cat = " . $_POST['$cat_id'] . ", len = " . strlen($_POST['$cat_id']));
 	print_r ("age = " . $_POST['$age_id']);
@@ -111,8 +111,8 @@ function prefix_resource_search_cat2() {
 		'cat_slug'    => $cat_slug,
 		'age_slug'    => $age_slug,
 		'region_slug' => $region_slug,
-		's'           => $s,
-		'tag'         => $tag_slug,
+		's_term'      => $s_term,
+		'tag_slug'    => $tag_slug,
 		'cat_name'    => $cat_name,
 		'age_name'    => $age_name,
 		'region_name' => $region_name,
@@ -127,7 +127,7 @@ add_action ('admin_post_resource_search_cat2', 'prefix_resource_search_cat2');
 
 /* Set up for page parms */
 function custom_query_vars_filter($vars) {
-  $vars[] = 's';
+  $vars[] = 's_term';
   $vars[] = 'cat_id';
   $vars[] = 'age_id';
   $vars[] = 'region_id';

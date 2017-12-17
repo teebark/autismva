@@ -7,7 +7,7 @@ get_header(); ?>
 		<div id="content-area" class="clearfix">
 			<div id="left-area">
 		<?php
-			$s = get_query_var('s',FALSE);
+			$s_term = get_query_var('s_term',FALSE);
 			$tag_id = get_query_var('tag_id',FALSE);
 			$cat_id = get_query_var('cat_id',FALSE);
 			$age_id = get_query_var('age_id',FALSE);
@@ -24,56 +24,62 @@ get_header(); ?>
 			Category = <?php print_r ($cat_name); ?><br>
 			Age = <?php print_r ($age_name); ?><br>
 			Region = <?php print_r ($region_name); ?><br>
-			Keyword = <?php print_r ($s); ?><br>
+			Keyword = <?php print_r ($s_term); ?><br>
 			Tag = <?php print_r ($tag_name); ?><br>
-			<?php 
-			$temp_post = $post; // Storing the object temp
-			/*
-			$query = new WP_Query(
-				array(
-					'post_type' => 'resource_db',
-					's'         => $s,
-					'showposts' => -1,
-				)
-			);
-			*/
-			$query = new WP_Query(
-				array(
-					'post_type' => 'resource_db',
-					'showposts'  => -1,
-					'tax_query'     => array (
-					/*
-						'relation' => 'AND',
-						*/
+			<?php
+			$args=array(
 						array(
 							'taxonomy'  => 'resource_cat',
-							'field'     => 'term_id',
-							'terms'     => -1,
+							'field'     => 'slug',
+							'terms'     => $cat_slug,
 						),
-						/*
 						array(
 							'taxonomy'  => 'resource_age',
-							'field'     => 'term_id',
-							'terms'     => $age_id,
-							'showposts' => -1,
+							'field'     => 'slug',
+							'terms'     => $age_slug,
 						),
 						array(
 							'taxonomy'  => 'resource_region',
-							'field'     => 'term_id',
-							'terms'     => $region_id,
-							'showposts' => -1,
+							'field'     => 'slug',
+							'terms'     => $region_slug,
 						),
 						array(
 							'taxonomy'  => 'post_tag',
 							'field'     => 'slug',
 							'terms'     => $tag_slug,
-							'showposts' => -1,
-						),
-						*/
-				)));
+						));
+			/* Set the first item in array */
+			$filter = array("relation' => 'AND'");
+
+			/* Only add to filter array if a value is passed */
+			if ($cat_slug != FALSE) {
+				$filter[] = $args[0];
+			}	
+			if ($age_slug != FALSE) {
+				$filter[] = $args[1];
+			}	
+			if ($region_slug != FALSE) {
+				$filter[] = $args[2];
+			}	
+			if ($tag_slug != FALSE) {
+				$filter[] = $args[3];
+			}	
+			var_dump ($filter); 
+				
+			$temp_post = $post; // Storing the object temp
+			
+			$query = new WP_Query(
+				array(
+					'post_type'  => 'resource_db',
+					'showposts'  => -1,
+					's'          => $s_term, 
+				 	/* 'tax_query'  => array ($filter) */
+				));
 			?>
 			, Count: <?php print_r($query->post_count); ?>
-			<?php if ( $query->have_posts() ) :
+			var_dump ($query);
+			<?php 
+			if ( $query->have_posts() ) :
 				while ( $query->have_posts() ) : $query->the_post();
 					$post_format = et_pb_post_format(); ?>
 
