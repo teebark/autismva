@@ -18,14 +18,15 @@ get_header(); ?>
 			$region_slug = get_query_var('region_slug',FALSE);
 			$tag_name = get_query_var('tag_name',FALSE);
 			$cat_name = get_query_var('cat_name',FALSE); 
+			$region_virtual_slug = 'no-location';
 			/* print_r ("cat = " . $cat_slug . ", type = " . gettype($cat_slug) . ", len = " . strlen($cat_slug)); */
 			?>
-			You searched on:<br>
-			Category = <?php print_r ($cat_name); ?><br>
-			Age = <?php print_r ($age_name); ?><br>
-			Region = <?php print_r ($region_name); ?><br>
-			Keyword = <?php print_r ($s_term); ?><br>
-			Tag = <?php print_r ($tag_name); ?><br>
+			<strong>You searched on: </strong>
+			<strong> Category: </strong><?php print_r ($cat_name); ?>
+			<strong> Age: </strong><?php print_r ($age_name); ?>
+			<strong> Region: </strong><?php print_r ($region_name); ?>
+			<strong> Keyword: </strong><?php print_r ($s_term); ?>
+			<strong> Tag: </strong><?php print_r ($tag_name); ?>
 			<?php
 			$args=array(
 						array(
@@ -41,7 +42,7 @@ get_header(); ?>
 						array(
 							'taxonomy'  => 'resource_region',
 							'field'     => 'slug',
-							'terms'     => $region_slug,
+							'terms'     => array($region_slug,$region_virtual_slug)
 						),
 						array(
 							'taxonomy'  => 'post_tag',
@@ -64,7 +65,7 @@ get_header(); ?>
 			if ($tag_slug != FALSE) {
 				$filter[] = $args[3];
 			}	
-			var_dump ($filter); 
+			/* var_dump ($filter); */
 				
 			$temp_post = $post; // Storing the object temp
 			
@@ -73,11 +74,10 @@ get_header(); ?>
 					'post_type'  => 'resource_db',
 					'showposts'  => -1,
 					's'          => $s_term, 
-				 	/* 'tax_query'  => array ($filter) */
+				 	'tax_query'  => array ($filter)
 				));
 			?>
-			, Count: <?php print_r($query->post_count); ?>
-			var_dump ($query);
+			<strong> Count: </strong><?php print_r($query->post_count); ?><br>
 			<?php 
 			if ( $query->have_posts() ) :
 				while ( $query->have_posts() ) : $query->the_post();

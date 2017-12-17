@@ -68,7 +68,8 @@ add_action ('admin_post_resource_search_cat', 'prefix_resource_search_cat');
 
 /* Test search */
 function prefix_resource_search_cat2() {
-	/* post variables available */
+	/* Can't use 's' for a name here, as wp intercepts a '?s' */
+	/* when the results page is posted */
 	$s_term = $_POST['s'];
 	/*
 	print_r ("cat = " . $_POST['$cat_id'] . ", len = " . strlen($_POST['$cat_id']));
