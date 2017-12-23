@@ -144,6 +144,21 @@ function custom_query_vars_filter($vars) {
 }
 add_filter( 'query_vars', 'custom_query_vars_filter' );
 
+function resource_search_form( $form ) {
+	$form = '<form id="category-select" class="category-select"  method="post" action="' . esc_url(admin_url('admin-post.php')) . '" >' .
+		wp_dropdown_categories( 'show_count=1&hierarchical=1&depth=2&show_option_none=Select by category&name=$cat_id&taxonomy=resource_cat&echo=0' ) . '<br>' .
+		wp_dropdown_categories( 'show_count=0&hierarchical=1&depth=1&show_option_none=Select by age&name=$age_id&taxonomy=resource_age&echo=0' ) . '<br>' .
+		wp_dropdown_categories( 'show_count=0&exclude=128&show_option_none=Select by region&name=$region_id&taxonomy=resource_region&echo=0' ) . '<br>' .
+		'<input type="text" name="s" placeholder="Search by keyword" /><br>
+		<input type="text" name="tag_name" placeholder="Search by tag" />
+		<input type="hidden" name="action" value="resource_search_cat2" />
+		<button type="submit" > Search </button>
+	</form>';
+return $form;
+}
+ 
+add_shortcode('resource_search', 'resource_search_form');
+
 /* Allows Divi to handle these custom post types */
 /*
 function my_et_builder_post_types( $post_types) {
