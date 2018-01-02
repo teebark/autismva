@@ -1,0 +1,44 @@
+{
+    "fields": [
+        {
+            "name": "Title",
+            "title": "Title",
+            "constraints": {
+                "required": true,
+                "type": "http://www.w3.org/2001/XMLSchema#string"
+			}
+		},
+		{
+            "name": "Body",
+            "title": "Body content",
+            "constraints": {
+                "required": true,
+                "type": "http://www.w3.org/2001/XMLSchema#string"
+			}
+		},
+		{
+            "name": "Primary Category",
+            "title": "Category",
+            "constraints": {
+                "required": true,
+                "pattern": "(General Resources|Medical & Behavioral Health|Legal and Advocacy|Resource Centers & Professional Associations|Funding Resources|Transition|Recreation & Leisure|Education)"
+			}
+        },
+		{
+            "name": "Region",
+            "title": "Region",
+            "constraints": {
+                "required": true,
+                "pattern": "(Central|Hampton Roads|No Location or Virtual|Northern|Outside Virginia|Southside|Southwest|Valley|West Central)"
+			}
+        },
+		{
+            "name": "Age",
+            "title": "Age",
+            "constraints": {
+                "required": true,
+                "pattern": "(Adult|All Ages|Child)"
+			}
+        }
+	]
+}
