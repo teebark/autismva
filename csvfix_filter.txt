@@ -1,0 +1,10 @@
+# csvfix_filter.txt
+#
+# check that:
+#   each row in the file has at least three fields
+#   all fields contain some non-whitespace data
+#   the third field contains only the values "M" and "F"
+
+required    1,2,3
+notempty    1,2,3
+values      3        "General Resources" "Medical & Behavioral Health" "Legal and Advocacy" "Resource Centers & Professional Associations" "Funding Resources" "Transition" "Recreation & Leisure" "Education"
