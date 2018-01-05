@@ -1,14 +1,14 @@
-PHP and CSS changes for the Commonwealth Autism web conversion project.
-csvfix_filter config file for csfix
-functions.php contains the shortcode for the resource database search
-resource-cat.php is the template for cpt resource_db
-resource-result-cat.php is obsolete
-resource-search-cat.php os obsolete
-resource-search-cat2 is obsolete
-resource-search is obsolete
-resource-json.txt is the json code for use with csvlint
-resource-show-results.php is the template for showing the results of a search on the resource database
-single-resource_db.php is the template for showing a single post of the resource database
+<h1>PHP and CSS changes for the Commonwealth Autism web conversion project.<k/h1>
+csvfix_filter config file for csfix<br>
+functions.php contains the shortcode for the resource database search<br>
+resource-cat.php is the template for cpt resource_db<br>
+resource-result-cat.php is obsolete<br>
+resource-search-cat.php os obsolete<br>
+resource-search-cat2 is obsolete<br>
+resource-search is obsolete<br>
+resource-json.txt is the json code for use with csvlint<br>
+resource-show-results.php is the template for showing the results of a search on the resource database<br>
+single-resource_db.php is the template for showing a single post of the resource database<br>
 style.css is the css in the child theme, it4-causes-dev-site
 
 to extract the resource database from the ca site.
