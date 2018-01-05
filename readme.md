@@ -1,4 +1,4 @@
-<h1>PHP and CSS changes for the Commonwealth Autism web conversion project.<k/h1>
+<h1>PHP and CSS changes for the Commonwealth Autism web conversion project.</h1>
 csvfix_filter config file for csfix<br>
 functions.php contains the shortcode for the resource database search<br>
 resource-cat.php is the template for cpt resource_db<br>
