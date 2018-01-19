@@ -1,0 +1,2 @@
+if(isNull(cells["Copy Subcategory 1"])," ",cells["Copy Subcategory 1"].value) + "," + if(isNull(cells["Copy Subcategory 2"])," ",cells["Copy Subcategory 2"].value) + "," + if(isNull(cells["Copy Subcategory 3"])," ",cells["Copy Subcategory 3"].value) + "," + if(isNull(cells["Copy Subcategory 4"])," ",cells["Copy Subcategory 4"].value) + "," + if(isNull(cells["Copy Subcategory 5"])," ",cells["Copy Subcategory 5"].value)
+
