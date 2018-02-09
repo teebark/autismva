@@ -1,0 +1,1 @@
+splitByLengths(value, 3,3,4)[0] + '-'+ splitByLengths(value, 3,3,4)[1]+'-'+splitByLengths(value, 3,3,4)[2]

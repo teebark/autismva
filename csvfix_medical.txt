@@ -1,21 +1,17 @@
-# csvfix_filter.txt
+# csvfix_medical.txt
 #
 # check that:
 #   each row in the file has at least 4 fields
 #   all fields contain some non-whitespace data
 #   the other field validate primary category and subcategories
 
-required    1,2,3,4
-notempty    1,2,3,4
-# verify resource category (col 1 against filter col 3 (Primary Category)
-lookup      * 3:1 resource_categories.csv
 # verify resource subcategory (col 2) against filter col 6 (Copy Subcategory 1)
-lookup      * 7:2 resource_cat_subcat.csv
+lookup      * 7:2 filter-medical.csv
 # verify resource subcategory (col 2) against filter col 8 (Copy Subcategory 2)
-lookup      * 8:2 resource_cat_subcat.csv
+lookup      * 8:2 filter-medical.csv
 # verify resource subcategory (col 2) against filter col 9 (Copy Subcategory 3)
-lookup      * 9:2 resource_cat_subcat.csv
+lookup      * 9:2 filter-medical.csv
 # verify resource subcategory (col 2) against filter col 10 (Copy Subcategory 4)
-lookup      * 10:2 resource_cat_subcat.csv
+lookup      * 10:2 filter-medical.csv
 # verify resource subcategory (col 2) against filter col 11 (Copy Subcategory 5)
-lookup      * 11:2 resource_cat_subcat.csv
+lookup      * 11:2 filter-medical.csv

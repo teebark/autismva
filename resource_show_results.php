@@ -72,12 +72,12 @@ get_header(); ?>
 			$query = new WP_Query(
 				array(
 					'post_type'  => 'resource_db',
-					'showposts'  => -1,
+					'showposts'  => 10,
 					's'          => $s_term, 
 				 	'tax_query'  => array ($filter)
 				));
 			?>
-			<strong> Count: </strong><?php print_r($query->post_count); ?><br>
+			<strong> Count: </strong><?php $total_count = $query->max_num_pages * $query->post_count; print_r($total_count); ?><br>
 			<?php 
 			if ( $query->have_posts() ) :
 				while ( $query->have_posts() ) : $query->the_post();
@@ -134,7 +134,27 @@ get_header(); ?>
 
 					</article> <!-- .et_pb_post -->
 			<?php
-					endwhile;
+					endwhile;?>
+					<div class="pagination">
+    <?php 
+        echo paginate_links( array(
+            'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
+            'total'        => $query->max_num_pages,
+            'current'      => max( 1, get_query_var( 'paged' ) ),
+            'format'       => '?paged=%#%',
+            'show_all'     => false,
+            'type'         => 'plain',
+            'end_size'     => 2,
+            'mid_size'     => 1,
+            'prev_next'    => true,
+            'prev_text'    => sprintf( '<i></i> %1$s', __( 'Newer Posts', 'text-domain' ) ),
+            'next_text'    => sprintf( '%1$s <i></i>', __( 'Older Posts', 'text-domain' ) ),
+            'add_args'     => false,
+            'add_fragment' => '',
+        ) );
+    ?>
+		</div>
+			<?php
 					$post = $temp_post; // Restore the value of $post to the original
 					if ( function_exists( 'wp_pagenavi' ) )
 						wp_pagenavi();

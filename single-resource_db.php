@@ -123,20 +123,55 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 						do_action( 'et_before_content' );
 
 						the_content();
-
+						
 						wp_link_pages( array( 'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'Divi' ), 'after' => '</div>' ) );
 					?>
 					<div class="resource_meta">
 						<ul class="resource_list">
-						<li><strong>City: </strong><?php echo get_post_meta($post->ID, 'city', true); ?> </li>
-						<li><strong>Address: </strong><?php echo get_post_meta($post->ID, 'address_1k', true); ?> </li>
-						<li><strong>State: </strong><?php echo get_post_meta($post->ID, 'state', true); ?>
-							<strong>Zip: </strong><?php echo get_post_meta($post->ID, 'postal_code', true); ?> </il>
-						<li><strong>Contact: </strong><?php echo get_post_meta($post->ID, 'contact_name', true); ?> </li>
-						<li><strong>Email: </strong><?php echo get_post_meta($post->ID, 'email', true); ?> </li>
-						<li><strong>Phone: </strong><?php echo get_post_meta($post->ID, 'office', true); ?> 
-							<strong>Phone 2: </strong><?php echo get_post_meta($post->ID, 'office_2', true); ?></li>
-						<li><strong>Web site: </strong><?php echo get_post_meta($post->ID, 'website', true); ?> </li>
+						<?php $val = get_post_meta($post->ID, 'address_1', true);
+						if ($val) { ?>
+							<li><strong>Address: </strong><?php echo $val; ?> </li>
+							<?php } else {} ?>
+						<?php $val = get_post_meta($post->ID, 'city', true);
+						if ($val) { ?>
+							<li><strong>City: </strong><?php echo $val; ?> </li>
+							<?php } else {} ?>
+						<?php $val = get_post_meta($post->ID, 'state', true);
+						if ($val) { ?>
+							<li><strong>State: </strong><?php echo $val; ?></li>
+							<?php } else {} ?>
+						<?php $val = get_post_meta($post->ID, 'postal_code', true);
+						if ($val) { ?>
+							<li><strong>Zip: </strong><?php echo $val; ?></li>
+							<?php } else {} ?>
+						<?php $val = get_post_meta($post->ID, 'contact_name', true);
+						if ($val) { ?>
+							<li><strong>Contact: </strong><?php echo $val; ?> </li>
+							<?php } else {} ?>
+						<?php $val = get_post_meta($post->ID, 'email', true);
+						if ($val) { ?>
+							<li><strong>Email: </strong><?php echo $val; ?> </li>
+							<?php } else {} ?>
+						<?php $val = get_post_meta($post->ID, 'office', true);
+						if ($val) { ?>
+							<li><strong>Phone: </strong><?php echo $val; ?> </li>
+							<?php } else {} ?>
+						<?php $val = get_post_meta($post->ID, 'office_2', true);
+						if ($val) { ?>
+							<li><strong>Phone 2: </strong><?php echo $val; ?> </li>
+							<?php } else {} ?>
+						<?php $val = get_post_meta($post->ID, 'fax', true);
+						if ($val) { ?>
+							<li><strong>Fax: </strong><?php echo $val; ?> </li>
+							<?php } else {} ?>
+						<?php $val = get_post_meta($post->ID, 'website', true);
+						if ($val) { ?>
+							<li><strong>Web site: </strong><?php echo $val; ?> </li>
+							<?php } else {} ?>
+						<?php $val = get_post_meta($post->ID, 'additional', true);
+						if ($val) { ?>
+							<li><strong>Additional subcategories: </strong><?php echo $val; ?> </li>
+							<?php } else {} ?>
 						</ul>
 					</div>
 
@@ -156,9 +191,11 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 					<?php if (et_get_option('divi_integration_single_bottom') <> '' && et_get_option('divi_integrate_singlebottom_enable') == 'on') echo(et_get_option('divi_integration_single_bottom')); ?>
 
 					<?php
+					    /*
 						if ( ( comments_open() || get_comments_number() ) && 'on' == et_get_option( 'divi_show_postcomments', 'on' ) ) {
 							comments_template( '', true );
 						}
+						*/
 					?>
 					</div> <!-- .et_post_meta_wrapper -->
 				</article> <!-- .et_pb_post -->
