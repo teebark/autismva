@@ -10,7 +10,12 @@
  * Do not remove this or your child theme will not work unless you include a @import rule in your child stylesheet.
  */
 function dce_load_divi_stylesheet() {
-    wp_enqueue_style( 'divi-parent-style', get_template_directory_uri() . '/style.css' );
+    wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+	wp_enqueue_style( 'child-style',
+        get_stylesheet_directory_uri() . '/style.css',
+        array( $parent_style ),
+        wp_get_theme()->get('Version')
+    );
 }
 add_action( 'wp_enqueue_scripts', 'dce_load_divi_stylesheet' );
 
@@ -127,12 +132,20 @@ return $form;
  
 add_shortcode('resource_search', 'resource_search_form');
 
+/* Called by openrefine to add link to website field */
 function make_link ($website) {
 	if ($website) {
 		$website = '<a href="' . $website . '">' . $website . '</a>';
 	return $website;
 	}
 }
+
+/* Make text for website into link  */
+function add_link_resource ($atts,$content) {
+	$website = '<a href="' . $atts['website'] . '">' . $atts['website'] . '</a>';
+	return $website;
+}
+add_shortcode( 'add-link', 'add_link_resource' );
 
 /* Allows Divi to handle these custom post types */
 /*

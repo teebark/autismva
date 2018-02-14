@@ -1,13 +1,12 @@
 /*
 Theme Name:  IT4CAUSES DEV SITE
-Theme URI:   http://it4causes.genlack.cloud
+Theme URI:   http://autismva.it4causeshosting.org
 Version:     1.0
-Description: A child theme of Divi. This is a custom child theme created for our site IT4Causes.
-Author:      Steve Lack
-Author URI:  http://genlack.com
+Description: Child theme of Divi
+Author:      Terry Barker
+Author URI:  http://teebark.com
 Template:    Divi
 */
-
 
 /***********************************************************************
 Caution: do not remove this to keep Divi Children Engine always updated 
@@ -53,6 +52,8 @@ Divi Children Engine version: 1.0.4
 }
 
 /*- YOU CAN INCLUDE THE CUSTOM CODE FOR YOUR CHILD THEME BELOW THIS LINE-*/
+/* Expand category search boxes */
+.postform {width: 400px; height: 30px;}
 
 /*------------------------------------------------*/
 /*-----------------[BASIC STYLES]-----------------*/

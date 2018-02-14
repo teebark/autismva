@@ -165,6 +165,7 @@ $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 							<li><strong>Fax: </strong><?php echo $val; ?> </li>
 							<?php } else {} ?>
 						<?php $val = get_post_meta($post->ID, 'website', true);
+						$val = do_shortcode($val);
 						if ($val) { ?>
 							<li><strong>Web site: </strong><?php echo $val; ?> </li>
 							<?php } else {} ?>

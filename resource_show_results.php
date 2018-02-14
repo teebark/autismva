@@ -18,7 +18,7 @@ get_header(); ?>
 			$region_slug = get_query_var('region_slug',FALSE);
 			$tag_name = get_query_var('tag_name',FALSE);
 			$cat_name = get_query_var('cat_name',FALSE); 
-			$region_virtual_slug = 'no-location';
+			$region_virtual_slug = 'no-location-or-virtual';
 			/* print_r ("cat = " . $cat_slug . ", type = " . gettype($cat_slug) . ", len = " . strlen($cat_slug)); */
 			?>
 			<strong>You searched on: </strong>
@@ -68,19 +68,20 @@ get_header(); ?>
 			/* var_dump ($filter); */
 				
 			$temp_post = $post; // Storing the object temp
-			
-			$query = new WP_Query(
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+			$wp_query = new WP_Query(
 				array(
 					'post_type'  => 'resource_db',
-					'showposts'  => 10,
+					'posts_per_page' => 10,
+					'paged'      => $paged,
 					's'          => $s_term, 
 				 	'tax_query'  => array ($filter)
 				));
 			?>
-			<strong> Count: </strong><?php $total_count = $query->max_num_pages * $query->post_count; print_r($total_count); ?><br>
+			<strong> Pages: </strong><?php print_r ($wp_query->max_num_pages); ?><br>
 			<?php 
-			if ( $query->have_posts() ) :
-				while ( $query->have_posts() ) : $query->the_post();
+			if ( $wp_query->have_posts() ) :
+				while ( $wp_query->have_posts() ) : $wp_query->the_post();
 					$post_format = et_pb_post_format(); ?>
 
 					<article id="post-<?php the_ID(); ?>" <?php post_class( 'et_pb_post' ); ?>>
@@ -134,28 +135,8 @@ get_header(); ?>
 
 					</article> <!-- .et_pb_post -->
 			<?php
-					endwhile;?>
-					<div class="pagination">
-    <?php 
-        echo paginate_links( array(
-            'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-            'total'        => $query->max_num_pages,
-            'current'      => max( 1, get_query_var( 'paged' ) ),
-            'format'       => '?paged=%#%',
-            'show_all'     => false,
-            'type'         => 'plain',
-            'end_size'     => 2,
-            'mid_size'     => 1,
-            'prev_next'    => true,
-            'prev_text'    => sprintf( '<i></i> %1$s', __( 'Newer Posts', 'text-domain' ) ),
-            'next_text'    => sprintf( '%1$s <i></i>', __( 'Older Posts', 'text-domain' ) ),
-            'add_args'     => false,
-            'add_fragment' => '',
-        ) );
-    ?>
-		</div>
-			<?php
-					$post = $temp_post; // Restore the value of $post to the original
+					endwhile;
+
 					if ( function_exists( 'wp_pagenavi' ) )
 						wp_pagenavi();
 					else
