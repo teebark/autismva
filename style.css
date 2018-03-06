@@ -54,6 +54,28 @@ Divi Children Engine version: 1.0.4
 /*- YOU CAN INCLUDE THE CUSTOM CODE FOR YOUR CHILD THEME BELOW THIS LINE-*/
 /* Expand category search boxes */
 .postform {width: 400px; height: 30px;}
+/* Get rid of hyperlink underline on logo */
+#main-header > div.container.clearfix.et_menu_container > div.logo_container > a {
+	text-decoration: none;
+	border: 0 none;
+	}
+/* Get rid of hyperlink underlines on top (secondary) menu */
+	#et-secondary-nav > li.menu-item.menu-item-type-post_type.menu-item-object-page > a {
+	text-decoration: none;
+	border: 0 none;
+	}
+/* Get rid of hyperlink underlines on primary menu */
+#top-menu a {
+	text-decoration: none;
+	border: 0 none;
+	}
+/* Set color for hyperlinks in the footer */
+#footer-widgets .footer-widget .textwidget a {color: #cd5c5c;}
+/* Get rid of hyperlink underline on Better Business Bureau logo */
+#footer-widgets .footer-widget .textwidget a[href*="sealclick"] {
+	text-decoration: none;
+	border: 0 none;
+	}
 
 /*------------------------------------------------*/
 /*-----------------[BASIC STYLES]-----------------*/
