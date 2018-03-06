@@ -16,6 +16,13 @@ filter-legal.csv file filtered for category 'legal'<br>
 filter-recreation.csv file filtered for category 'recreation'<br>
 filter-resource.csv file filtered for category 'resource'<br>
 functions.php contains the shortcode for the resource database search<br>
+header.php copied from divi, with pageproofer script added<br>
+openrefine_merge.txt code to merge the category fields after split to get rid of white space<br>
+openrefine_strip_phone.txt strips special characters--spaces, dashes, etc.<br>
+openrefine_format_phone.txt formats phone as xxx-xxx-xxxx<br>
+pageproofer_autismvatest.txt script for autismvatest<br>
+pageproofer_it4hosting.txt script for autismva.it4causeshosting.org<br>
+pageproofer_teebark.txt script for autismva.teebark.com<br>
 resource-cat.php is the template for cpt resource_db<br>
 resource-result-cat.php is obsolete<br>
 resource-search-cat.php os obsolete<br>
@@ -25,11 +32,19 @@ resource-json.txt is the json code for use with csvlint<br>
 resource-show-results.php is the template for showing the results of a search on the resource database<br>
 single-resource_db.php is the template for showing a single post of the resource database<br>
 style.css is the css in the child theme, it4-causes-dev-site<br>
+wpallimport_make_link.txt adds hyperlink to website field
 
-<h2>To extract the resource database from the ca site</h2>
+<h2>To extract the resource database from the original drupal site</h2>
 http://www.autismva.org/export-resources/export-resources-data<br>
 
 A screen will come up with a view of the database. The two input fields are for beginning and ending nid. The first one in the db is 77, and the last one is 1236. I couldn't extract all of them at once, so I used 77-600 for the first half. If it times out, just keep trying, and it should eventually work. Scroll down to the bottom and click on the csv button. It will download to your download folder, with the name export-resource-data. Rename it before extracting the second half, using nid 601-1236.<br>
+<br>
+The utility csvfix was used to validate the incoming csv data from the drupal site. With it, we verified that no content fields were blank and that subcategories lined up with their respective categories.<br>
+Documentation: https://neilb.bitbucket.io/csvfix/manual/csvfix16/csvfix.html<br>
+<br>
+The utility openrefine was used to clean up the data. The original data contained white space in the category fields, so we used the utility to trim that. The category field had multiple categories imbedded, so we created a new primary category field, then used the utility to split subcategories into separate fields, get rid of special characters, then recombine them into a new subcategory field. Also used the utility to add hyperlinkds to the website field, and to format phone numbers into xxx-xxx-xxxx format.<br>
+Documentation: https://github.com/OpenRefine/OpenRefine/wiki/Documentation-For-Users<br>
+<br>
 <h2>Customization</h2>
 A custom post type, resource_db was created for handling the resource database. Three taxonomies were created--resource-cat, resource-region, and resource_age, corresponding to the form fields on the search page. They were built with plugin Custom UI.<br>
 The search page name is resource-finder, and it uses the default template. The content of this page uses a shortcode<br>
